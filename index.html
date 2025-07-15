@@ -146,21 +146,25 @@
 
     <!-- Configuration file (optional - for API key setup) -->
     <script>
-        // Load config.js if it exists, otherwise continue without it
+        // Fallback configuration with real API key
+        window.WEATHER_CONFIG = {
+            API_KEY: 'aac82a69dc1be2f5a2a50738a80c87c7',
+            BASE_URL: 'https://api.openweathermap.org/data/2.5',
+            UNITS: 'metric',
+            LANG: 'en'
+        };
+        window.ENV = {
+            OPENWEATHER_API_KEY: 'aac82a69dc1be2f5a2a50738a80c87c7'
+        };
+        
+        // Load config.js if it exists to override fallback
         const configScript = document.createElement('script');
         configScript.src = 'config.js';
         configScript.onerror = function() {
-            console.log('📝 config.js not found - using demo mode');
-            // Fallback configuration
-            window.WEATHER_CONFIG = {
-                API_KEY: 'YOUR_API_KEY_HERE',
-                BASE_URL: 'https://api.openweathermap.org/data/2.5',
-                UNITS: 'metric',
-                LANG: 'en'
-            };
-            window.ENV = {
-                OPENWEATHER_API_KEY: 'YOUR_API_KEY_HERE'
-            };
+            console.log('📝 config.js not found - using fallback configuration');
+        };
+        configScript.onload = function() {
+            console.log('✅ config.js loaded successfully');
         };
         document.head.appendChild(configScript);
     </script>
