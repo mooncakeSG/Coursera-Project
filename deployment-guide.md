@@ -71,38 +71,35 @@ git push -u origin main
 
 ### Step 4: Configure Your API Key (Important!)
 
-Since your API key is currently in the JavaScript file, you need to secure it:
+For GitHub Pages deployment, you have several secure options:
 
-#### Option A: Use Environment Variables (Recommended)
+#### Option A: GitHub Secrets (Most Secure - Recommended)
 
-1. **Create a new file** called `.env` in your project:
-```
-OPENWEATHER_API_KEY=your_actual_api_key_here
-```
+1. **Go to your GitHub repository**
+2. **Click Settings** → **Secrets and variables** → **Actions**
+3. **Click "New repository secret"**
+4. **Name**: `OPENWEATHER_API_KEY`
+5. **Value**: Your actual API key from OpenWeatherMap
+6. **Click "Add secret"**
 
-2. **Update your `script.js`** to use environment variables:
-```javascript
-const API_CONFIG = {
-    BASE_URL: 'https://api.openweathermap.org/data/2.5',
-    API_KEY: process.env.OPENWEATHER_API_KEY || 'YOUR_API_KEY_HERE',
-    UNITS: 'metric',
-    LANG: 'en'
-};
-```
+The GitHub Actions workflow will automatically:
+- ✅ Inject your API key during deployment
+- ✅ Create a secure `config.js` file
+- ✅ Keep your API key private and secure
 
 #### Option B: Use Demo Mode (Simplest)
 
-For demonstration purposes, you can keep the demo mode:
+For demonstration purposes, deploy without an API key:
 
-1. **Update your `script.js`** to use demo mode by default:
-```javascript
-const API_CONFIG = {
-    BASE_URL: 'https://api.openweathermap.org/data/2.5',
-    API_KEY: 'YOUR_API_KEY_HERE', // Will trigger demo mode
-    UNITS: 'metric',
-    LANG: 'en'
-};
-```
+1. **Skip the GitHub Secrets setup**
+2. **The workflow will automatically use demo mode**
+3. **Your site will work with sample data**
+
+#### Option C: Manual Config File
+
+1. **Create `config.js`** with your API key (locally only)
+2. **Upload manually** after each deployment
+3. **Note**: This exposes your API key in the repository
 
 ### Step 5: Test Your Deployment
 

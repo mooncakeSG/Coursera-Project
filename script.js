@@ -23,22 +23,32 @@ const API_CONFIG = {
  * @returns {string} API key
  */
 function getApiKey() {
-    // Check for environment variable (for server-side deployment)
-    if (typeof process !== 'undefined' && process.env && process.env.OPENWEATHER_API_KEY) {
-        return process.env.OPENWEATHER_API_KEY;
-    }
-    
-    // Check for window environment variable (for client-side)
-    if (typeof window !== 'undefined' && window.ENV && window.ENV.OPENWEATHER_API_KEY) {
-        return window.ENV.OPENWEATHER_API_KEY;
-    }
-    
-    // Check for global config object
-    if (typeof window !== 'undefined' && window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY) {
+    // Check for global config object (from config.js)
+    if (typeof window !== 'undefined' && window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY && window.WEATHER_CONFIG.API_KEY !== 'your_actual_api_key_here') {
+        console.log('🔑 API key found in WEATHER_CONFIG');
         return window.WEATHER_CONFIG.API_KEY;
     }
     
+    // Check for window environment variable (for client-side)
+    if (typeof window !== 'undefined' && window.ENV && window.ENV.OPENWEATHER_API_KEY && window.ENV.OPENWEATHER_API_KEY !== 'your_actual_api_key_here') {
+        console.log('🔑 API key found in ENV');
+        return window.ENV.OPENWEATHER_API_KEY;
+    }
+    
+    // Check for environment variable (for server-side deployment)
+    if (typeof process !== 'undefined' && process.env && process.env.OPENWEATHER_API_KEY) {
+        console.log('🔑 API key found in process.env');
+        return process.env.OPENWEATHER_API_KEY;
+    }
+    
+    // Check for GitHub Pages environment variable (for deployment)
+    if (typeof window !== 'undefined' && window.GITHUB_PAGES_API_KEY) {
+        console.log('🔑 API key found in GitHub Pages environment');
+        return window.GITHUB_PAGES_API_KEY;
+    }
+    
     // Fallback to placeholder
+    console.log('⚠️  No valid API key found, using demo mode');
     return 'YOUR_API_KEY_HERE';
 }
 

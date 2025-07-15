@@ -145,7 +145,15 @@
     </footer>
 
     <!-- Configuration file (optional - for API key setup) -->
-    <script src="config.js"></script>
+    <script>
+        // Load config.js if it exists, otherwise continue without it
+        const configScript = document.createElement('script');
+        configScript.src = 'config.js';
+        configScript.onerror = function() {
+            console.log('📝 config.js not found - using demo mode');
+        };
+        document.head.appendChild(configScript);
+    </script>
     <script src="script.js"></script>
 </body>
 </html> 
