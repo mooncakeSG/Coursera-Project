@@ -24,13 +24,15 @@ jobs:
       run: |
         if [ -f package.json ]; then
           npm ci
+        else
+          echo "No package.json found - skipping dependency installation"
         fi
         
     - name: Build with API key
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: |
-        if [ -n "$OPENWEATHER_API_KEY" ]; then
+        if [ -n "$OPENWEATHER_API_KEY" ] && [ "$OPENWEATHER_API_KEY" != "" ]; then
           echo "🔑 API key found, creating config.js..."
           # Create config.js with the API key
           cat > config.js << EOF
@@ -71,6 +73,7 @@ jobs:
           
           console.log('🔧 Configuration loaded in demo mode');
           EOF
+          echo "✅ Demo mode config created"
         fi
         
     - name: Deploy to GitHub Pages
