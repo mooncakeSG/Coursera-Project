@@ -26,7 +26,10 @@ jobs:
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       run: |
-        if [ -n "$OPENWEATHER_API_KEY" ] && [ "$OPENWEATHER_API_KEY" != "" ]; then
+        echo "🔍 Checking API key availability..."
+        if [ -n "$OPENWEATHER_API_KEY" ]; then
+          echo "✅ API key is set (length: ${#OPENWEATHER_API_KEY})"
+          if [ "$OPENWEATHER_API_KEY" != "" ]; then
           echo "🔑 API key found, creating config.js..."
           echo "/**" > config.js
           echo " * Weather Dashboard Configuration (Auto-generated for GitHub Pages)" >> config.js
@@ -46,6 +49,7 @@ jobs:
           echo "" >> config.js
           echo "console.log('🔧 Configuration loaded with API key from GitHub Secrets!');" >> config.js
           echo "✅ config.js created with API key"
+          fi
         else
           echo "⚠️  No API key found, using demo mode"
           echo "/**" > config.js

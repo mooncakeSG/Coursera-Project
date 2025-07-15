@@ -23,14 +23,22 @@ const API_CONFIG = {
  * @returns {string} API key
  */
 function getApiKey() {
+    // Debug: Log what we find
+    console.log('🔍 Checking for API key...');
+    if (typeof window !== 'undefined' && window.WEATHER_CONFIG) {
+        console.log('📋 WEATHER_CONFIG found:', window.WEATHER_CONFIG);
+    }
+    if (typeof window !== 'undefined' && window.ENV) {
+        console.log('📋 ENV found:', window.ENV);
+    }
     // Check for global config object (from config.js)
-    if (typeof window !== 'undefined' && window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY && window.WEATHER_CONFIG.API_KEY !== 'your_actual_api_key_here') {
+    if (typeof window !== 'undefined' && window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY && window.WEATHER_CONFIG.API_KEY !== 'YOUR_API_KEY_HERE' && window.WEATHER_CONFIG.API_KEY !== 'your_actual_api_key_here') {
         console.log('🔑 API key found in WEATHER_CONFIG');
         return window.WEATHER_CONFIG.API_KEY;
     }
     
     // Check for window environment variable (for client-side)
-    if (typeof window !== 'undefined' && window.ENV && window.ENV.OPENWEATHER_API_KEY && window.ENV.OPENWEATHER_API_KEY !== 'your_actual_api_key_here') {
+    if (typeof window !== 'undefined' && window.ENV && window.ENV.OPENWEATHER_API_KEY && window.ENV.OPENWEATHER_API_KEY !== 'YOUR_API_KEY_HERE' && window.ENV.OPENWEATHER_API_KEY !== 'your_actual_api_key_here') {
         console.log('🔑 API key found in ENV');
         return window.ENV.OPENWEATHER_API_KEY;
     }
