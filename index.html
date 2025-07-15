@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard - API Integration Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Weather Dashboard</h1>
+            <p class="header__subtitle">Real-time weather data powered by OpenWeatherMap API</p>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main">
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        class="search-input" 
+                        placeholder="Enter city name..."
+                        aria-label="City name input"
+                    >
+                    <button 
+                        type="button" 
+                        id="searchBtn" 
+                        class="search-button"
+                        aria-label="Search for weather"
+                    >
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+                <div class="error-message" id="errorMessage" role="alert" aria-live="polite"></div>
+            </section>
+
+            <!-- Loading State -->
+            <section class="loading-section" id="loadingSection">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Fetching weather data...</p>
+            </section>
+
+            <!-- Weather Display Section -->
+            <section class="weather-section" id="weatherSection">
+                <!-- Current Weather Card -->
+                <article class="weather-card current-weather">
+                    <header class="weather-card__header">
+                        <h2 class="weather-card__title">Current Weather</h2>
+                        <div class="location-info">
+                            <h3 class="location-name" id="locationName">--</h3>
+                            <p class="location-country" id="locationCountry">--</p>
+                        </div>
+                    </header>
+                    
+                    <div class="weather-card__content">
+                        <div class="weather-main">
+                            <div class="temperature-container">
+                                <span class="temperature" id="temperature">--</span>
+                                <span class="temperature-unit">°C</span>
+                            </div>
+                            <div class="weather-description" id="weatherDescription">--</div>
+                        </div>
+                        
+                        <div class="weather-icon-container">
+                            <img 
+                                id="weatherIcon" 
+                                class="weather-icon" 
+                                src="" 
+                                alt="Weather condition icon"
+                            >
+                        </div>
+                    </div>
+
+                    <footer class="weather-card__footer">
+                        <div class="weather-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Feels like</span>
+                                <span class="detail-value" id="feelsLike">--°C</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Humidity</span>
+                                <span class="detail-value" id="humidity">--%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Wind</span>
+                                <span class="detail-value" id="windSpeed">-- m/s</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Pressure</span>
+                                <span class="detail-value" id="pressure">-- hPa</span>
+                            </div>
+                        </div>
+                    </footer>
+                </article>
+
+                <!-- Forecast Section -->
+                <article class="weather-card forecast-card">
+                    <header class="weather-card__header">
+                        <h2 class="weather-card__title">5-Day Forecast</h2>
+                    </header>
+                    
+                    <div class="forecast-container" id="forecastContainer">
+                        <!-- Forecast items will be dynamically inserted here -->
+                    </div>
+                </article>
+            </section>
+
+            <!-- API Information Section -->
+            <section class="api-info-section">
+                <article class="info-card">
+                    <h2 class="info-card__title">About This Demo</h2>
+                    <div class="info-content">
+                        <p>This website demonstrates proficiency in:</p>
+                        <ul class="feature-list">
+                            <li><strong>HTML:</strong> Semantic structure with appropriate tags</li>
+                            <li><strong>CSS:</strong> Responsive design with modern layouts</li>
+                            <li><strong>JavaScript:</strong> DOM manipulation and API integration</li>
+                            <li><strong>API Integration:</strong> Asynchronous data fetching and error handling</li>
+                        </ul>
+                        <p class="api-note">
+                            <strong>Data Source:</strong> OpenWeatherMap API - Free weather data service
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Simple Weather Dashboard. Built with HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
