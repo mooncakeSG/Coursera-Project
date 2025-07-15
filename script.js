@@ -13,7 +13,7 @@
 // API Configuration
 const API_CONFIG = {
     BASE_URL: 'https://api.openweathermap.org/data/2.5',
-    API_KEY: 'aac82a69dc1be2f5a2a50738a80c87c7', // Your OpenWeatherMap API key
+    API_KEY: 'YOUR_API_KEY_HERE', // Replace with your API key for production
     UNITS: 'metric',
     LANG: 'en'
 };
