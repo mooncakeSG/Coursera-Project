@@ -151,6 +151,16 @@
         configScript.src = 'config.js';
         configScript.onerror = function() {
             console.log('📝 config.js not found - using demo mode');
+            // Fallback configuration
+            window.WEATHER_CONFIG = {
+                API_KEY: 'YOUR_API_KEY_HERE',
+                BASE_URL: 'https://api.openweathermap.org/data/2.5',
+                UNITS: 'metric',
+                LANG: 'en'
+            };
+            window.ENV = {
+                OPENWEATHER_API_KEY: 'YOUR_API_KEY_HERE'
+            };
         };
         document.head.appendChild(configScript);
     </script>

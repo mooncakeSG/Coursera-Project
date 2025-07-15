@@ -28,25 +28,29 @@ jobs:
       run: |
         echo "🔍 Checking API key availability..."
         echo "API key length: ${#OPENWEATHER_API_KEY}"
+        echo "API key value (first 10 chars): ${OPENWEATHER_API_KEY:0:10}..."
+        
+        # Remove any existing config.js to ensure clean creation
+        rm -f config.js
         
         # Always create config.js - either with API key or demo mode
-        if [ -n "$OPENWEATHER_API_KEY" ] && [ "$OPENWEATHER_API_KEY" != "" ] && [ "$OPENWEATHER_API_KEY" != "null" ]; then
+        if [ -n "$OPENWEATHER_API_KEY" ] && [ "$OPENWEATHER_API_KEY" != "" ] && [ "$OPENWEATHER_API_KEY" != "null" ] && [ "$OPENWEATHER_API_KEY" != "undefined" ]; then
           echo "🔑 API key found, creating config.js with real API key..."
-          cat > config.js << 'EOF'
+          cat > config.js << EOF
 /**
  * Weather Dashboard Configuration (Auto-generated for GitHub Pages)
  * This file is generated during deployment with the API key from GitHub Secrets
  */
 
 window.WEATHER_CONFIG = {
-    API_KEY: '$OPENWEATHER_API_KEY',
+    API_KEY: '${OPENWEATHER_API_KEY}',
     BASE_URL: 'https://api.openweathermap.org/data/2.5',
     UNITS: 'metric',
     LANG: 'en'
 };
 
 window.ENV = {
-    OPENWEATHER_API_KEY: '$OPENWEATHER_API_KEY'
+    OPENWEATHER_API_KEY: '${OPENWEATHER_API_KEY}'
 };
 
 console.log('🔧 Configuration loaded with API key from GitHub Secrets!');
@@ -74,6 +78,17 @@ EOF
         
         echo "📄 config.js contents:"
         cat config.js
+        
+        echo "📁 Files in current directory:"
+        ls -la
+        
+        echo "📄 Verifying config.js exists and is readable:"
+        if [ -f config.js ]; then
+          echo "✅ config.js file exists"
+          echo "📏 File size: $(wc -c < config.js) bytes"
+        else
+          echo "❌ config.js file does not exist!"
+        fi
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
