@@ -14,20 +14,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-        
-    - name: Install dependencies (if any)
-      run: |
-        if [ -f package.json ]; then
-          npm ci
-        else
-          echo "No package.json found - skipping dependency installation"
-        fi
-        
     - name: Build with API key
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
