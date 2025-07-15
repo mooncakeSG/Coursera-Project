@@ -13,10 +13,34 @@
 // API Configuration
 const API_CONFIG = {
     BASE_URL: 'https://api.openweathermap.org/data/2.5',
-    API_KEY: 'YOUR_API_KEY_HERE', // Replace with your API key for production
+    API_KEY: getApiKey(), // Get API key from environment or fallback
     UNITS: 'metric',
     LANG: 'en'
 };
+
+/**
+ * Get API key from environment variables or fallback to placeholder
+ * @returns {string} API key
+ */
+function getApiKey() {
+    // Check for environment variable (for server-side deployment)
+    if (typeof process !== 'undefined' && process.env && process.env.OPENWEATHER_API_KEY) {
+        return process.env.OPENWEATHER_API_KEY;
+    }
+    
+    // Check for window environment variable (for client-side)
+    if (typeof window !== 'undefined' && window.ENV && window.ENV.OPENWEATHER_API_KEY) {
+        return window.ENV.OPENWEATHER_API_KEY;
+    }
+    
+    // Check for global config object
+    if (typeof window !== 'undefined' && window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY) {
+        return window.WEATHER_CONFIG.API_KEY;
+    }
+    
+    // Fallback to placeholder
+    return 'YOUR_API_KEY_HERE';
+}
 
 // DOM Elements - Cached for performance
 const DOM_ELEMENTS = {
