@@ -8,7 +8,7 @@
 // API Configuration
 window.WEATHER_CONFIG = {
     // Your OpenWeatherMap API key
-    API_KEY: 'aac82a69dc1be2f5a2a50738a80c87c7',
+    API_KEY: 'API key here',
     
     // API settings
     BASE_URL: 'https://api.openweathermap.org/data/2.5',
